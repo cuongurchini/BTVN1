@@ -2,6 +2,8 @@ package com.example.nguyenphucuong.exercise_week2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,12 @@ import android.widget.ImageView;
  */
 
 public class ChangeTitleActivity extends Activity {
+
+    private View color;
+    private EditText edtChange;
+    public static final String COLORVALUE = "key_color_value";
+    public static final String TEXT = "key_text";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +32,8 @@ public class ChangeTitleActivity extends Activity {
         ImageView imageViewBlue = (ImageView) findViewById(R.id.ivBlue);
         ImageView imageViewTeal = (ImageView) findViewById(R.id.ivTeal);
         ImageView imageViewGreen = (ImageView) findViewById(R.id.ivGreen);
+        color = (View) findViewById(R.id.vSample);
+        edtChange = (EditText) findViewById(R.id.edtChange);
 
         imageViewPink.setOnClickListener(onClickListenerPink);
         imageViewPurple.setOnClickListener(onClickListenerPurple);
@@ -34,12 +44,24 @@ public class ChangeTitleActivity extends Activity {
 
         Button btnSave =  (Button) findViewById(R.id.btnSave);
         btnSave.setOnClickListener(onClickListenerSave);
+
+        Intent data = getIntent();
+        if (data != null) {
+            String text = data.getStringExtra(MainActivity.TEXT);
+            int colorValue = data.getIntExtra(MainActivity.COLOR,0);
+            edtChange.setText(text);
+            edtChange.setTextColor(colorValue);
+            color.setBackgroundColor(colorValue);
+        }
     }
 
     private View.OnClickListener onClickListenerSave = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             Intent i = new Intent(ChangeTitleActivity.this, MainActivity.class);
+            i.putExtra(COLORVALUE, ((ColorDrawable) color.getBackground()).getColor());
+            i.putExtra(TEXT, edtChange.getText().toString());
             startActivity(i);
 
 //            EditText edtChange = (EditText) findViewById(R.id.edtChange);
@@ -58,7 +80,6 @@ public class ChangeTitleActivity extends Activity {
             View vSample = (View) findViewById(R.id.vSample);
             vSample.setBackgroundColor(getColor(R.color.pink));
 
-            EditText edtChange = (EditText) findViewById(R.id.edtChange);
             edtChange.setTextColor(getColor(R.color.pink));
         }
     };
@@ -69,7 +90,6 @@ public class ChangeTitleActivity extends Activity {
             View vSample = (View) findViewById(R.id.vSample);
             vSample.setBackgroundColor(getColor(R.color.purple));
 
-            EditText edtChange = (EditText) findViewById(R.id.edtChange);
             edtChange.setTextColor(getColor(R.color.purple));
         }
     };
@@ -80,7 +100,6 @@ public class ChangeTitleActivity extends Activity {
             View vSample = (View) findViewById(R.id.vSample);
             vSample.setBackgroundColor(getColor(R.color.indigo));
 
-            EditText edtChange = (EditText) findViewById(R.id.edtChange);
             edtChange.setTextColor(getColor(R.color.indigo));
         }
     };
@@ -91,7 +110,6 @@ public class ChangeTitleActivity extends Activity {
             View vSample = (View) findViewById(R.id.vSample);
             vSample.setBackgroundColor(getColor(R.color.blue));
 
-            EditText edtChange = (EditText) findViewById(R.id.edtChange);
             edtChange.setTextColor(getColor(R.color.blue));
         }
     };
@@ -102,7 +120,6 @@ public class ChangeTitleActivity extends Activity {
             View vSample = (View) findViewById(R.id.vSample);
             vSample.setBackgroundColor(getColor(R.color.teal));
 
-            EditText edtChange = (EditText) findViewById(R.id.edtChange);
             edtChange.setTextColor(getColor(R.color.teal));
         }
     };
@@ -113,7 +130,6 @@ public class ChangeTitleActivity extends Activity {
             View vSample = (View) findViewById(R.id.vSample);
             vSample.setBackgroundColor(getColor(R.color.green));
 
-            EditText edtChange = (EditText) findViewById(R.id.edtChange);
             edtChange.setTextColor(getColor(R.color.green));
         }
     };
