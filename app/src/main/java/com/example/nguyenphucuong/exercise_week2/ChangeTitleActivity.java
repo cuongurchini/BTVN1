@@ -58,21 +58,18 @@ public class ChangeTitleActivity extends Activity {
     private View.OnClickListener onClickListenerSave = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-            Intent i = new Intent(ChangeTitleActivity.this, MainActivity.class);
-            i.putExtra(COLORVALUE, ((ColorDrawable) color.getBackground()).getColor());
-            i.putExtra(TEXT, edtChange.getText().toString());
-            startActivity(i);
-
-//            EditText edtChange = (EditText) findViewById(R.id.edtChange);
-//            TextView tvMain = (TextView) findViewById(R.id.tvMain);
-//            tvMain.setText(edtChange.getText());
-
-//            View vSample = (View) findViewById(R.id.vSample);
-//            tvMain.setText((CharSequence) edtChange);
-//            tvMain.setTextColor(vSample.getSolidColor());
+            finish();
         }
     };
+
+    @Override
+    public void finish() {
+        Intent i = new Intent();
+        i.putExtra(COLORVALUE, ((ColorDrawable) color.getBackground()).getColor());
+        i.putExtra(TEXT, edtChange.getText().toString());
+        setResult(RESULT_OK, i);
+        super.finish();
+    }
 
     private View.OnClickListener onClickListenerPink = new View.OnClickListener() {
         @Override
